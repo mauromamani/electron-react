@@ -4,10 +4,8 @@
   "version": "0.0.0",
   "main": "dist/main/index.cjs",
   "scripts": {
-    "dev": "vite packages/renderer",
-    "build": "tsc && vite build",
-    "build:a": "tsc --noEmit -p packages/renderer/tsconfig.json && node scripts/build.mjs",
-    "preview": "vite preview"
+    "dev": "node scripts/watch.mjs",
+    "build": "tsc --noEmit -p packages/renderer/tsconfig.json && node scripts/build.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
