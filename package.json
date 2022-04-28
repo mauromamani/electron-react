@@ -2,9 +2,9 @@
   "name": "react-mui",
   "private": true,
   "version": "0.0.0",
-  "main": "dist/index.html",
+  "main": "dist/main/index.cjs",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite packages/renderer",
     "build": "tsc && vite build",
     "build:a": "tsc --noEmit -p packages/renderer/tsconfig.json && node scripts/build.mjs",
     "preview": "vite preview"

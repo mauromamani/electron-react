@@ -8,14 +8,13 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true,
+      preload: path.join(__dirname, '../preload/index.cjs'),
     },
   });
 
   win.loadURL(
     isDev
-      ? `file://${path.join(__dirname, '../../dist/index.html')}`
+      ? `file://${path.join(__dirname, '../renderer/index.html')}`
       : 'http://localhost:3000'
   );
 }

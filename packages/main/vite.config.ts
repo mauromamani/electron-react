@@ -1,4 +1,6 @@
+import { builtinModules } from 'module'
 import { defineConfig } from 'vite'
+import pkg from '../../package.json'
 
 export default defineConfig({
   root: __dirname,
@@ -10,6 +12,13 @@ export default defineConfig({
       entry: 'index.ts',
       formats: ['cjs'],
       fileName: () => '[name].cjs',
+    },
+    rollupOptions: {
+      external: [
+        'electron',
+        ...builtinModules,
+        ...Object.keys(pkg.dependencies || {}),
+      ],
     },
   },
 })
