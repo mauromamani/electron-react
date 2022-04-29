@@ -1,7 +1,17 @@
 import { Button } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
+import AboutPage from './pages/About';
+import HomePage from './pages/Home';
 
 function App() {
-  return <Button variant='contained'>MATERIAL UI</Button>;
+  return (
+    <div>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/about' element={<AboutPage />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
