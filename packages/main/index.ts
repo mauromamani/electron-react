@@ -2,8 +2,6 @@ import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import { join } from 'path';
 
-const isDev = process.env.IS_DEV == 'true' ? true : false;
-
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
@@ -13,10 +11,10 @@ function createWindow() {
     },
   });
 
-  if (isDev) {
-    win.loadURL('http://localhost:3000');
-  } else {
+  if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))
+  } else {
+    win.loadURL('http://localhost:3000');
   }
 }
 
