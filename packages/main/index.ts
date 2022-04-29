@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
+import { join } from 'path';
 
 const isDev = process.env.IS_DEV == 'true' ? true : false;
 
@@ -12,11 +13,11 @@ function createWindow() {
     },
   });
 
-  win.loadURL(
-    isDev
-      ? `file://${path.join(__dirname, '../renderer/index.html')}`
-      : 'http://localhost:3000'
-  );
+  if (isDev) {
+    win.loadURL('http://localhost:3000');
+  } else {
+    win.loadFile(join(__dirname, '../renderer/index.html'))
+  }
 }
 
 app.whenReady().then(() => {
