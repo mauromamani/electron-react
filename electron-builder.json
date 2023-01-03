@@ -1,5 +1,5 @@
 {
-  "appId": "YourAppID",
+  "appId": "Control-productos",
   "productName": "YourAppName",
   "copyright": "Copyright © 2022 ${author}",
   "asar": true,
@@ -12,7 +12,7 @@
     "target": [
       {
         "target": "nsis",
-        "arch": ["x64"]
+        "arch": ["x64", "ia32"]
       }
     ],
     "artifactName": "${productName}-${version}-Setup.${ext}"

@@ -1,6 +1,7 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import { join } from 'path';
+import './ipcMain';
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -8,6 +9,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.cjs'),
+      contextIsolation: true,
     },
   });
 

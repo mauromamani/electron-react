@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 function AboutPage() {
   return (
     <>
-      <Link to={'/'}>Home</Link>
-      <Button variant='contained'>About</Button>;
+      <Button variant='outlined'>
+        <Link to={'/'}>Home</Link>
+      </Button>
+      <Button variant='contained'>About</Button>
     </>
   );
 }

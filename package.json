@@ -1,8 +1,8 @@
 {
   "name": "project-name",
   "private": true,
-  "version": "0.0.0",
-  "author": "author-name",
+  "version": "0.0.1",
+  "author": "MAMANI MAURO BENJAMIN",
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",

@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/About';
 import HomePage from './pages/Home';
