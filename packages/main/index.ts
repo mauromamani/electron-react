@@ -2,10 +2,17 @@ import "reflect-metadata";
 import { app, BrowserWindow, dialog } from 'electron';
 import * as path from 'path';
 import { join } from 'path';
-import { AppDataSource } from "../renderer/src/database/data-source";
-import './ipcMain';
+import { AppDataSource } from "./database/data-source";
+import './handlers/product.handler';
 
 async function createWindow() {
+  // Database connection
+  try {
+    await AppDataSource.initialize();
+  } catch (error) {
+    dialog.showErrorBox("Error en la base de datos", "Contacte con el administrador del sistema.")
+  }
+
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -14,17 +21,6 @@ async function createWindow() {
       contextIsolation: true,
     },
   });
-
-  try {
-    await AppDataSource.initialize();
-    console.log("Database initialized!");
-    dialog.showMessageBox(win, {
-      message: "FUNCIONA",
-    })
-  } catch (error) {
-    console.log("Database crashed!");
-    console.log(error);
-  }
 
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))

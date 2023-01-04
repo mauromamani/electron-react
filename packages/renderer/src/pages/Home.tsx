@@ -12,29 +12,25 @@ import {
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-interface Product {
-  name: string;
-  price: number;
-}
-
 function HomePage() {
   /**
    * Hooks
    */
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
-  const [formData, setFormData] = useState<Product>({
+  const [formData, setFormData] = useState<IProduct>({
+    id: 0,
     name: '',
     price: 0,
   });
 
   useEffect(() => {
-    const productsString = localStorage.getItem('products');
-    const products: Product[] = productsString
-      ? JSON.parse(productsString)
-      : [];
+    const loadProducts = async () => {
+      const products = await window.ipcRenderer.invoke('get-products');
+      setProducts(products);
+    };
 
-    setProducts(products);
+    loadProducts();
   }, []);
 
   /**
@@ -53,13 +49,13 @@ function HomePage() {
   const submitForm = async (e: any) => {
     e.preventDefault();
 
-    const updatedProducts: Product[] = [...products, formData];
+    const newProduct = await window.ipcRenderer.invoke(
+      'create-product',
+      formData
+    );
 
+    const updatedProducts: IProduct[] = [...products, newProduct];
     setProducts(updatedProducts);
-    localStorage.setItem('products', JSON.stringify(updatedProducts));
-
-    const result = await window.ipcRenderer.invoke('testing-ipc', 'argumento');
-    console.log(result);
   };
 
   return (
@@ -105,8 +101,8 @@ function HomePage() {
           </TableHead>
 
           <TableBody>
-            {products.map((product: any) => (
-              <TableRow key={product.name}>
+            {products.map((product) => (
+              <TableRow key={product.id}>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.price}</TableCell>
               </TableRow>
