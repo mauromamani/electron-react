@@ -1,14 +1,18 @@
 {
   "name": "project-name",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "MAMANI MAURO BENJAMIN",
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",
     "build": "tsc --noEmit -p packages/renderer/tsconfig.json && node scripts/build.mjs && electron-builder"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.11"
+  },
   "devDependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
