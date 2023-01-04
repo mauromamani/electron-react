@@ -11,13 +11,16 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { createProduct, fetchProducts } from '../store/productsSlice';
 
 function HomePage() {
   /**
    * Hooks
    */
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const useDispatch = useAppDispatch();
 
+  const products = useAppSelector((state) => state.products);
   const [formData, setFormData] = useState<IProduct>({
     id: 0,
     name: '',
@@ -25,12 +28,7 @@ function HomePage() {
   });
 
   useEffect(() => {
-    const loadProducts = async () => {
-      const products = await window.ipcRenderer.invoke('get-products');
-      setProducts(products);
-    };
-
-    loadProducts();
+    useDispatch(fetchProducts());
   }, []);
 
   /**
@@ -49,13 +47,7 @@ function HomePage() {
   const submitForm = async (e: any) => {
     e.preventDefault();
 
-    const newProduct = await window.ipcRenderer.invoke(
-      'create-product',
-      formData
-    );
-
-    const updatedProducts: IProduct[] = [...products, newProduct];
-    setProducts(updatedProducts);
+    useDispatch(createProduct(formData));
   };
 
   return (
