@@ -1,16 +1,14 @@
-import { Route, Routes } from 'react-router-dom';
-import AboutPage from './pages/About';
-import HomePage from './pages/Home';
+import AppRouter from './router/AppRouter';
+import { DrawerHeader } from './components/drawer/DrawerHeader';
+import { Layout } from './components/layout';
 
-function App() {
+export default function App() {
   return (
-    <div>
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/about' element={<AboutPage />} />
-      </Routes>
-    </div>
+    <Layout>
+      <>
+        <DrawerHeader />
+        <AppRouter />
+      </>
+    </Layout>
   );
 }
-
-export default App;
